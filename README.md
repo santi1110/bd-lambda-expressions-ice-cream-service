@@ -29,6 +29,8 @@ There is also a method on our service, `prepareFlavors()` for preparing more
 ice cream by passing in a list of flavors to create. These are then looked
 up in the recipe store, which gives us the ingredients to mix into the ice cream.
 
+<p style="page-break-before: always;"/>
+
 The `IceCreamParlorService` depends on:
 - two DAOs, `CartonDao` and `RecipeDao`, for
   accessing `Carton`s and `Recipe`s, respectively.
@@ -46,7 +48,7 @@ with method references.
 
 ### Phase 0: It builds
 
-1. Build your project. You may need to null out instantiations to your Dagger component to complete the initial build. 
+1. Build your project. *(If necessary, null out instantiations to your Dagger component to complete the initial build.)*
 1. Run the `Phase0Test` and verify that it passes
 
 GOAL: Make sure that your project builds and the starter test passes.
@@ -64,23 +66,13 @@ are empty (`isEmpty()` returns true). The functional interface that
 you will be implementing with a lambda expression (and later a method reference)
 accepts a `Carton` and returns `true` if the carton is empty, `false` if not.
 
-1. Answer: **Which functional interface does this represent?**
-1. When your group agrees on the answer to this question, find the appropriate
-   place in `IceCreamParlorService.getSundae()` for this phase.
-1. Add a call to `removeIf()` on the `cartons` parameter,
-   passing in a functional interface implementation **using a lambda expression**
-   (not a method reference).
-1. Test that you've done it correctly by running the `lambdaexpressions-classroom-phase1`
-   RDE workflow.
-1. Compare your implementation with another member of your group.
-1. Now change your implementation to use a method reference.
-1. Test that this implementation works as well by running `Phase1Test`.
-
 GOAL: use a method reference to remove empty cartons so we only add non-empty flavors
 to the sundae.
 
 Phase 1 is complete when:
 - `Phase1Test` is passing
+
+<p style="page-break-before: always;"/>
 
 ### Phase 2: Build that sundae!
 
@@ -92,14 +84,6 @@ interface will accept each carton of ice cream and adds a scoop to the
 
 The functional interface you will be implementing with a lambda expression
 accepts a `Carton` and doesn't need to return anything.
-
-1. Answer: **Which functional interface does this represent?**
-1. When your group agrees on the answer to this question, find the appropriate
-   place in `IceCreamParlorService.buildSundae()` for this phase.
-1. Add a call to `forEach()` on the `cartons` argument, passing in a
-   lambda expression implementing the appropriate functional interface.
-1. Test that you've done it correctly by running `Phase1Test` and `Phase2Test`.
-1. Compare your implementation with another member of your group.
 
 GOAL: Use a lambda expression implementing a functional interface that adds
 a scoop from each carton to the customer's sundae.
@@ -117,23 +101,13 @@ return a `Queue<Ingredient>`.
 
 We request that you use `RecipeConverter`'s static method to do the conversion.
 
-1. Answer: **Which functional interface do you think it will require?**
-1. When your group agrees on the answer to this question, find the appropriate place
-   in `prepareFlavors()` to convert recipes to their ingredients. Implement the needed
-   logic **using a lambda expression** (not method reference).
-   Hint: You can take a look at the use of `map()` at the top of `prepareFlavors()`
-1. Test that you've done it correctly by running the `lambdaexpressions-classroom-phase3`
-   RDE workflow.
-1. Compare your implementation with another member of your group.
-1. Now change your implementation to use a method reference to the static method,
-   `fromRecipeToIngredientQueue`
-1. Test that this implementation works as well by running `Phase1Test`, `Phase2Test`, and `Phase3Test`.
-
 GOAL: use a method reference to convert recipes to their `Queue<Ingredient>`
 components
 
 Phase 3 is complete when:
 - `Phase1Test`, `Phase2Test`, and `Phase3Test` are passing.
+
+<p style="page-break-before: always;"/>
 
 ### Phase 4: Make that ice cream
 
@@ -145,39 +119,8 @@ method.
 The functional interface you will implement with a lambda expression
 returns a new `Ingredient` each time it is called (with no arguments).
 
-1. Answer: **Before looking at the code, which functional interface does this
-   represent?**
-1. When your group agrees on the answer to this question, find the appropriate place
-   in `IceCreamMaker.prepareIceCreamCarton()` to use the functional interface
-   passed in as an argument.
-1. Implement the change to use the functional interface to get each ingredient to
-   add to the `Mixer`.
-1. Verify this is working properly by running the `Phase4Test` method called
-   `iceCreamMaker_prepareIceCreamCarton_callsFunctionalInterface`
-   directly in IntelliJ.
-   (Note: the other tests in the test class probably will still fail at this point).
-1. Now return to `IceCreamParlorService.makeIceCreamCartons()` and provide the
-   appropriate functional interface as a lambda expression to each call to
-   `prepareIceCreamCarton()`.
-   Hint: Feel free to mutate your `Queue` in the lambda expression!
-1. Verify you've got it working by running the `lambdaexpressions-classroom-phase4`
-   RDE workflow.
-1. Compare your implementation with another member of your group.
-
 GOAL: Implement logic that accepts a lambda expression and call that method with
 a lambda expression, so that the proper ingredients are mixed in for each flavor.
 
 Phase 4 is complete when:
 - All tests are passing
-
-### Extension
-
-You've created a lambda expression for each of the four functional interfaces
-we've studied. Time to write one on your own.
-
-When a customer specifies a sundae with an empty flavor, the ice cream parlor
-skips that scoop. Write a method that creates cartons for any missing flavors.
-Call your method before creating the sundae.
-
-**CAUTION**: This will cause tests for earlier phases to fail, because they
-expect the sundae to omit scoops from empty cartons.
