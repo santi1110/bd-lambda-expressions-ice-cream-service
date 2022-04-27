@@ -25,9 +25,7 @@ public class IceCreamMaker {
         Mixer mixer = new Mixer();
 
         while (true) {
-            // PHASE 4: Replace: use ingredientSupplier to get each ingredient
-            // (until null returned)
-            Ingredient ingredient = null;
+            Ingredient ingredient = ingredientSupplier.get();
 
             if (null == ingredient) {
                 break;
