@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Phase2Test {
+public class  Phase2Test {
     private static final IceCreamParlorServiceComponent DAGGER = DaggerIceCreamParlorServiceComponent.create();
 
     private IceCreamParlorService service;

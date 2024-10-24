@@ -1,5 +1,6 @@
 package com.ata.lambdaexpressions.classroom;
 
+import com.ata.lambdaexpressions.classroom.converter.RecipeConverter;
 import com.ata.lambdaexpressions.classroom.dao.CartonDao;
 import com.ata.lambdaexpressions.classroom.dao.RecipeDao;
 import com.ata.lambdaexpressions.classroom.exception.CartonCreationFailedException;
@@ -53,6 +54,8 @@ public class IceCreamParlorService {
 
         // PHASE 1: Use removeIf() to remove any empty cartons from cartons
 
+        cartons.removeIf(Carton::isEmpty);
+
         return buildSundae(cartons);
     }
 
@@ -62,6 +65,8 @@ public class IceCreamParlorService {
 
         // PHASE 2: Use forEach() to add one scoop of each flavor
         // remaining in cartons
+        cartons.forEach((aCarton)-> {sundae.addScoop(aCarton.getFlavor());});
+
 
         return sundae;
     }
@@ -93,7 +98,12 @@ public class IceCreamParlorService {
         );
 
         // PHASE 3: Replace right hand side: use map() to convert List<Recipe> to List<Queue<Ingredient>>
-        List<Queue<Ingredient>> ingredientQueues = new ArrayList<>();
+   /*     List<Queue<Ingredient>> ingredientQueues = new ArrayList<>();*/
+        /*List<Queue<Ingredient>> ingredientQueues =  recipes.stream().map(RecipeConverter:: fromRecipeToIngredientQueue)
+                .collect(Collectors.toList());*/
+
+        List<Queue<Ingredient>> ingredientQueues =  recipes.stream().map((aRecipe) ->RecipeConverter.fromRecipeToIngredientQueue(aRecipe))
+                .collect(Collectors.toList());
 
         return makeIceCreamCartons(ingredientQueues);
     }
@@ -105,7 +115,7 @@ public class IceCreamParlorService {
         for (Queue<Ingredient> ingredients : ingredientQueues) {
 
             // PHASE 4: provide Supplier to prepareIceCream()
-            if (iceCreamMaker.prepareIceCreamCarton(null)) {
+            if (iceCreamMaker.prepareIceCreamCarton(() -> ingredients.poll())) {
                 cartonsCreated++;
             }
         }
